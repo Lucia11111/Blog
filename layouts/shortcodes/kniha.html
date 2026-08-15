@@ -1,0 +1,41 @@
+{{- /* Karta knihy: obálka, pod ňou maličké náhľady do knihy (kliknutím sa
+       otvoria vo veľkom) a vpravo základné údaje.
+       Všetko číta z front matteru.  Použitie:  {{< kniha >}} */ -}}
+
+{{- $p := .Page.Params -}}
+{{- $en := eq .Page.Language.Lang "en" -}}
+{{- $nazov := $p.nazovKnihy | default .Page.Title -}}
+{{- $obalka := .Page.Resources.GetMatch ($p.obalka | default "obalka.*") -}}
+{{- $ukazky := .Page.Resources.Match ($p.ukazky | default "ukazka-*") -}}
+
+<aside class="b612-kniha">
+  {{- with $obalka }}
+  {{- $img := cond (ge .Width 560) (.Resize "520x webp q90") . }}
+  <a class="b612-kniha__obalka" href="{{ .RelPermalink }}" target="_blank" rel="noopener">
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+         alt="{{ $nazov }}" loading="lazy">
+  </a>
+  {{- end }}
+
+  <div class="b612-kniha__stlpec">
+    <dl class="b612-kniha__udaje">
+      <dt>{{ if $en }}Title{{ else }}Názov{{ end }}</dt><dd>{{ $nazov }}</dd>
+      {{- with $p.autor }}<dt>{{ if $en }}Author{{ else }}Autor{{ end }}</dt><dd>{{ . }}</dd>{{ end }}
+      {{- with $p.originalnyNazov }}<dt>{{ if $en }}Original{{ else }}Pôvodne{{ end }}</dt><dd><em>{{ . }}</em></dd>{{ end }}
+      {{- with $p.zanre }}<dt>{{ if $en }}Genre{{ else }}Žáner{{ end }}</dt><dd>{{ delimit . ", " }}</dd>{{ end }}
+    </dl>
+
+    {{- with $ukazky }}
+    <div class="b612-kniha__nahlady">
+      {{- range . }}
+      {{- $t := cond (ge .Width 300) (.Fill "200x266 webp q82 smart") . }}
+      <a href="{{ .RelPermalink }}" target="_blank" rel="noopener"
+         title="{{ if $en }}Open the page{{ else }}Otvoriť stránku{{ end }}">
+        <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}"
+             alt="{{ if $en }}Page from the book{{ else }}Náhľad do knihy{{ end }}" loading="lazy">
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</aside>

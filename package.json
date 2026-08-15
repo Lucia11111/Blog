@@ -1,0 +1,13 @@
+{
+  "name": "bookspace-b612",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Knižný blog BookSpaceB612 + generátor Instagram carouselov",
+  "type": "module",
+  "scripts": {
+    "start": "hugo server --buildDrafts --navigateToChanged",
+    "nova": "node ig/nova-kniha.mjs",
+    "ig": "node ig/generate.mjs",
+    "build": "hugo --gc --minify"
+  }
+}

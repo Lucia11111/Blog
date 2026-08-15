@@ -1,0 +1,11 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content">
+        {{ .Content | markdownify }}
+    </div>
+    {{- /* Ikonky Instagramu a RSS sú v päte webu, nie tu. */ -}}
+</article>
+{{- end -}}

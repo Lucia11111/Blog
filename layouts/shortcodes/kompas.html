@@ -1,0 +1,39 @@
+{{- /* B612 Compass — radar graf hodnotenia knihy. Číta `kompas:` z front matteru.
+
+       Použitie:          {{< kompas >}}                 iba graf
+                          {{< kompas skore="true" >}}    + celkové skóre pod grafom
+                          {{< kompas popisky="true" >}}  + legenda s vysvetlením osí */ -}}
+
+{{- $b := index site.Data "b612" -}}
+{{- $k := .Page.Params.kompas -}}
+{{- $lang := .Page.Language.Lang -}}
+{{- $showLegend := eq (.Get "popisky") "true" -}}
+{{- $showSkore := eq (.Get "skore") "true" -}}
+
+{{- if not $k -}}
+  {{- warnf "kompas: stránka %q nemá v front matteri `kompas:` so štyrmi hodnotami" .Page.File.Path -}}
+{{- else -}}
+
+<figure class="b612-kompas">
+  {{ partial "b612/kompas-svg.html" (dict "kompas" $k "id" (printf "k-%s" (anchorize .Page.RelPermalink))) }}
+
+  {{- if $showSkore }}
+  {{- $sum := 0.0 }}
+  {{- range $b.compass.axes }}{{ $sum = add $sum (float (index $k .key | default 0)) }}{{ end }}
+  <figcaption class="b612-kompas__caption">
+    <span class="b612-kompas__znacka">B612 COMPASS</span>
+    <span class="b612-kompas__celkom">{{ lang.FormatNumber 1 (div $sum 4.0) }} / {{ $b.compass.max }}</span>
+  </figcaption>
+  {{- end }}
+
+  {{- if $showLegend }}
+  <dl class="b612-kompas__legenda">
+    {{- range $b.compass.axes }}
+    <dt>{{ .label }} <span>— {{ if eq $lang "en" }}{{ .en }}{{ else }}{{ .sk }}{{ end }}</span></dt>
+    <dd>{{ if eq $lang "en" }}{{ .popisEn }}{{ else }}{{ .popisSk }}{{ end }}</dd>
+    {{- end }}
+  </dl>
+  {{- end }}
+</figure>
+
+{{- end -}}

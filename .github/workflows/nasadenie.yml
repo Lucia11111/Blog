@@ -1,0 +1,73 @@
+# Postaví web a nasadí ho na GitHub Pages.
+# Spustí sa vždy, keď pošleš zmeny do vetvy main (git push).
+#
+# Rozpísané recenzie (draft: true) sa NEZVEREJNIA — na to je `--buildDrafts`,
+# ktorý tu naschvál nie je. Kým je v hlavičke draft: true, kniha ostáva len u teba.
+
+name: Nasadenie na GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # umožní spustiť nasadenie aj ručne z karty Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Naraz beží len jedno nasadenie. Ak pošleš zmeny dvakrát rýchlo za sebou,
+# rozbehnuté nasadenie sa nechá dobehnúť a novšie počká.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.155.2
+    steps:
+      - name: Nainštaluj Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb \
+            https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Stiahni zdrojáky
+        uses: actions/checkout@v4
+        with:
+          # téma PaperMod je pripojená ako submodul, treba ju stiahnuť tiež
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Priprav GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Postav web
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Odovzdaj hotový web
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Nasaď
+        id: deployment
+        uses: actions/deploy-pages@v4

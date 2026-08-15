@@ -1,0 +1,87 @@
+{
+  "brand": {
+    "name": "BookSpaceB612",
+    "handle": "@bookspaceb612",
+    "tagline": "Niektoré príbehy čítame. Iné v nás zostanú."
+  },
+  "palette": {
+    "navy": "#101B2D",
+    "navyDeep": "#031021",
+    "navySoft": "#16243B",
+    "cream": "#F7F2E7",
+    "creamDim": "#D9D2C4",
+    "gold": "#D9A93E",
+    "goldSoft": "#E8C877",
+    "rose": "#C2686F",
+    "muted": "#8C9BB0"
+  },
+  "compass": {
+    "max": 10,
+    "axes": [
+      {
+        "key": "style",
+        "label": "STYLE",
+        "sk": "Štýl",
+        "en": "Style",
+        "popisSk": "Jazyk, veta, rytmus. Ako je to napísané.",
+        "popisEn": "Language, sentence, rhythm. How it is written.",
+        "angle": -90
+      },
+      {
+        "key": "story",
+        "label": "STORY",
+        "sk": "Príbeh",
+        "en": "Story",
+        "popisSk": "Dej, ťah, postavy. Chce sa mi čítať ďalej?",
+        "popisEn": "Plot, pull, characters. Do I want to keep reading?",
+        "angle": 0
+      },
+      {
+        "key": "echo",
+        "label": "ECHO",
+        "sk": "Ozvena",
+        "en": "Echo",
+        "popisSk": "Čo zo mnou ostalo týždeň po dočítaní.",
+        "popisEn": "What stayed with me a week after finishing.",
+        "angle": 90
+      },
+      {
+        "key": "depth",
+        "label": "DEPTH",
+        "sk": "Hĺbka",
+        "en": "Depth",
+        "popisSk": "Myšlienka pod dejom. Má to čo povedať?",
+        "popisEn": "The idea beneath the plot. Does it have something to say?",
+        "angle": 180
+      }
+    ]
+  },
+  "instagram": {
+    "width": 1080,
+    "height": 1350,
+    "hashtagsSk": [
+      "#bookspaceb612",
+      "#kniznyblog",
+      "#knihy",
+      "#citam",
+      "#knihomol",
+      "#knihyslovensko",
+      "#recenziaknihy",
+      "#citanie",
+      "#bookstagramsk",
+      "#malyprinc"
+    ],
+    "hashtagsEn": [
+      "#bookspaceb612",
+      "#bookstagram",
+      "#bookreview",
+      "#booklover",
+      "#currentlyreading",
+      "#bookquotes",
+      "#readersofinstagram",
+      "#bookishlife",
+      "#thelittleprince",
+      "#b612"
+    ]
+  }
+}

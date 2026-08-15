@@ -1,0 +1,79 @@
+{{- /* Vykreslí radar graf B612 Compass. Používa ho web aj generátor Instagram
+       postov, takže graf vyzerá na oboch miestach identicky.
+
+       Farby neurčuje táto šablóna — riadi ich CSS cez triedy `kmp-*`,
+       aby sa graf vedel prispôsobiť krémovému aj nočnému podkladu.
+
+       Parametre (dict):
+         kompas  — mapa {style, story, echo, depth}
+         id      — jedinečná predpona pre gradient (viac grafov na stránke)
+         labels  — "false" vypne názvy osí
+         font    — veľkosť písma popiskov v jednotkách viewBoxu (default 21)
+    */ -}}
+
+{{- $b := index site.Data "b612" -}}
+{{- $k := .kompas -}}
+{{- $labels := ne .labels "false" -}}
+{{- $font := .font | default 21 -}}
+{{- $id := .id | default "b612" -}}
+
+{{- $max := float $b.compass.max -}}
+{{- $cx := 250.0 -}}
+{{- $cy := 250.0 -}}
+{{- $R := 140.0 -}}
+{{- $Rlabel := 196.0 -}}
+
+{{- $pts := slice -}}
+{{- range $b.compass.axes -}}
+  {{- $v := float (index $k .key | default 0) -}}
+  {{- $rad := math.ToRadians (float .angle) -}}
+  {{- $r := mul $R (div $v $max) -}}
+  {{- $pts = $pts | append (printf "%.1f,%.1f" (add $cx (mul $r (math.Cos $rad))) (add $cy (mul $r (math.Sin $rad)))) -}}
+{{- end -}}
+
+<svg class="kmp" viewBox="0 0 500 500" role="img"
+     aria-label="B612 Compass: {{ range $i, $a := $b.compass.axes }}{{ if $i }}, {{ end }}{{ $a.label }} {{ index $k $a.key }}{{ end }}">
+  <defs>
+    <radialGradient id="{{ $id }}-glow" cx="50%" cy="50%" r="50%">
+      <stop class="kmp-stop-in"  offset="0%"/>
+      <stop class="kmp-stop-out" offset="100%"/>
+    </radialGradient>
+  </defs>
+
+  {{- range $i := (seq 5) }}
+  <circle class="kmp-mriezka{{ if eq $i 5 }} kmp-mriezka--vonkajsia{{ end }}"
+          cx="{{ $cx }}" cy="{{ $cy }}" r="{{ mul $R (div (float $i) 5.0) }}"/>
+  {{- end }}
+
+  {{- range $b.compass.axes }}
+  {{- $rad := math.ToRadians (float .angle) }}
+  <line class="kmp-os" x1="{{ $cx }}" y1="{{ $cy }}"
+        x2="{{ printf "%.1f" (add $cx (mul $R (math.Cos $rad))) }}"
+        y2="{{ printf "%.1f" (add $cy (mul $R (math.Sin $rad))) }}"/>
+  {{- end }}
+
+  <polygon class="kmp-plocha" points="{{ delimit $pts " " }}" fill="url(#{{ $id }}-glow)"/>
+
+  {{- range $b.compass.axes }}
+  {{- $v := float (index $k .key | default 0) }}
+  {{- $rad := math.ToRadians (float .angle) }}
+  {{- $r := mul $R (div $v $max) }}
+  <circle class="kmp-bod"
+          cx="{{ printf "%.1f" (add $cx (mul $r (math.Cos $rad))) }}"
+          cy="{{ printf "%.1f" (add $cy (mul $r (math.Sin $rad))) }}" r="5"/>
+  {{- if $labels }}
+  {{- $lx := add $cx (mul $Rlabel (math.Cos $rad)) }}
+  {{- $ly := add $cy (mul $Rlabel (math.Sin $rad)) }}
+  {{- $anchor := cond (eq .angle 0) "start" (cond (eq .angle 180) "end" "middle") }}
+  <text class="kmp-popis" x="{{ printf "%.1f" $lx }}" y="{{ printf "%.1f" $ly }}"
+        font-size="{{ $font }}" letter-spacing="{{ mul (float $font) 0.16 }}"
+        text-anchor="{{ $anchor }}"
+        dominant-baseline="{{ cond (eq .angle -90) "auto" (cond (eq .angle 90) "hanging" "middle") }}">{{ .label }}</text>
+  <text class="kmp-cislo" x="{{ printf "%.1f" $lx }}"
+        y="{{ printf "%.1f" (cond (eq .angle -90) (sub $ly (mul (float $font) 1.05)) (cond (eq .angle 90) (add $ly (mul (float $font) 1.25)) (add $ly (mul (float $font) 0.95)))) }}"
+        font-size="{{ mul (float $font) 0.82 }}" text-anchor="{{ $anchor }}">{{ index $k .key }}</text>
+  {{- end }}
+  {{- end }}
+
+  <circle class="kmp-bod kmp-stred" cx="{{ $cx }}" cy="{{ $cy }}" r="2.5"/>
+</svg>

@@ -1,0 +1,26 @@
+{{- $b := index site.Data "b612" -}}
+{{- $p := .Params -}}
+{{- $k := $p.kompas -}}
+{{- if and $k (in (slice "knihy" "books") .Section) -}}
+{{- $nazov := $p.nazovKnihy | default .Title -}}
+{{- $en := eq .Language.Lang "en" -}}
+{{- $sum := 0.0 -}}
+{{- range $b.compass.axes }}{{ $sum = add $sum (float (index $k .key | default 0)) }}{{ end -}}
+{{- $tags := cond $en $b.instagram.hashtagsEn $b.instagram.hashtagsSk -}}
+{{- with $p.hashtagy }}{{ $tags = $tags | append . }}{{ end -}}
+{{ $nazov }}{{ with $p.autor }} — {{ . }}{{ end }}
+{{ with $p.podtitul }}
+{{ . }}
+{{ end }}
+B612 COMPASS
+{{ range $i, $a := $b.compass.axes }}{{ if $i }} · {{ end }}{{ $a.label }} {{ index $k $a.key }}/{{ $b.compass.max }}{{ end }}
+{{ with $p.zaver }}
+{{ . }}
+{{ end }}
+{{ if $en }}Full review on the blog — link in bio.{{ else }}Celá recenzia na blogu — odkaz v bio.{{ end }}
+
+.
+.
+.
+{{ delimit $tags " " }}
+{{- end -}}

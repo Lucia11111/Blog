@@ -1,0 +1,33 @@
+# ── čo Hugo vyrobí pri každom builde ─────────────────────────────
+# Hotový web sa skladá až na GitHube, netreba ho verzovať.
+/public/
+/resources/
+.hugo_build.lock
+
+# ── obrázky pre Instagram ────────────────────────────────────────
+# Vygenerujú sa na jeden príkaz (npm run ig), preto ich neukladáme.
+/ig/out/
+
+# ── smeti macOS a editorov ───────────────────────────────────────
+.DS_Store
+.AppleDouble
+._*
+.idea/
+.vscode/
+
+# ── node ─────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── dočasné súbory Wordu ─────────────────────────────────────────
+~$*
+
+# ── pracovné podklady ────────────────────────────────────────────
+# Wordy s hodnotením, pôvodné fotky z mobilu, logá a inšpirácie
+# ostávajú len v tvojom počítači. Na web ich netreba a repozitár
+# je verejný. Zálohuj si ich preto zvlášť (napr. na iCloud).
+/Inspirace/
+/KINHA Desate proroctvi/
+*.docx
+/HEADER.png
+/LOGO*.png

@@ -1,0 +1,28 @@
+{{- /* Vyzbiera citáty zo všetkých recenzií v danom jazyku a vypíše ich s odkazom na knihu.
+       Použitie na stránke /citaty/:  {{< vsetkyCitaty >}} */ -}}
+
+{{- $lang := .Page.Language.Lang -}}
+{{- $en := eq $lang "en" -}}
+{{- $pages := where site.RegularPages "Params.citaty" "!=" nil -}}
+
+{{- if $pages }}
+<div class="b612-citaty">
+{{- range $pages.ByDate.Reverse }}
+  {{- $p := . -}}
+  {{- range .Params.citaty }}
+    {{- if .text }}
+  <blockquote class="b612-citat">
+    <p>{{ .text | markdownify }}</p>
+    <cite>
+      <a href="{{ $p.RelPermalink }}">{{ with $p.Params.nazovKnihy }}{{ . }}{{ else }}{{ $p.Title }}{{ end }}</a>
+      {{- with $p.Params.autor }} — {{ . }}{{ end }}
+      {{- with .strana }}, s. {{ . }}{{ end }}
+    </cite>
+  </blockquote>
+    {{- end }}
+  {{- end }}
+{{- end }}
+</div>
+{{- else }}
+<p><em>{{ if $en }}No quotes yet.{{ else }}Zatiaľ tu nie sú žiadne citáty.{{ end }}</em></p>
+{{- end }}

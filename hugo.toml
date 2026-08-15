@@ -1,0 +1,180 @@
+# Adresa pre lokálne písanie. Pri nasadení ju GitHub Actions prepíše
+# na skutočnú adresu blogu cez --baseURL, takže tu ju nemusíš meniť.
+# Nesmie obsahovať podpriečinok — PaperMod z nej počíta drobčekovú navigáciu.
+baseURL = "http://localhost:1313/"
+title = "BookSpaceB612"
+theme = "PaperMod"
+
+defaultContentLanguage = "sk"
+defaultContentLanguageInSubdir = false
+hasCJKLanguage = false
+
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+summaryLength = 30
+
+[pagination]
+  pagerSize = 12
+
+pygmentsUseClasses = true
+enableInlineShortcodes = true
+
+[languages]
+  [languages.sk]
+    languageName = "SK"
+    languageCode = "sk-SK"
+    contentDir = "content/sk"
+    weight = 1
+    title = "BookSpaceB612"
+    [languages.sk.params]
+      description = "Knižný blog o príbehoch, ktoré v nás nechajú ozvenu."
+      [languages.sk.params.homeInfoParams]
+        Title = "Niektoré príbehy čítame.<br>Iné v nás zostanú."
+        Content = "Knižný blog o tom, čo čítam."
+    [[languages.sk.menu.main]]
+      identifier = "knihy"
+      name = "Knihy"
+      url = "/knihy/"
+      weight = 10
+    [[languages.sk.menu.main]]
+      identifier = "citaty"
+      name = "Citáty"
+      url = "/citaty/"
+      weight = 20
+    [[languages.sk.menu.main]]
+      identifier = "o-blogu"
+      name = "O blogu"
+      url = "/o-blogu/"
+      weight = 40
+    [[languages.sk.menu.main]]
+      identifier = "hladat"
+      name = "Hľadať"
+      url = "/hladat/"
+      weight = 50
+
+  [languages.en]
+    languageName = "EN"
+    languageCode = "en-US"
+    contentDir = "content/en"
+    weight = 2
+    title = "BookSpaceB612"
+    [languages.en.params]
+      description = "A book blog about stories that leave an echo."
+      [languages.en.params.homeInfoParams]
+        Title = "Some stories we read.<br>Others stay with us."
+        Content = "A book blog about what I read."
+    [[languages.en.menu.main]]
+      identifier = "books"
+      name = "Books"
+      url = "/en/books/"
+      weight = 10
+    [[languages.en.menu.main]]
+      identifier = "quotes"
+      name = "Quotes"
+      url = "/en/quotes/"
+      weight = 20
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name = "About"
+      url = "/en/about/"
+      weight = 40
+    [[languages.en.menu.main]]
+      identifier = "search"
+      name = "Search"
+      url = "/en/search/"
+      weight = 50
+
+[params]
+  env = "production"
+  mainSections = ["knihy", "books"]
+  author = "Lucia"
+  DateFormat = "2. 1. 2006"
+  defaultTheme = "light"
+  disableThemeToggle = true
+
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+  ShowWordCount = false
+  ShowRssButtonInSectionTermList = true
+  ShowToc = false
+  hideMeta = false
+  hideSummary = false
+  disableScrollToTop = false
+  comments = false
+
+  images = ["img/nahlad.png"]
+
+  [params.label]
+    text = "BookSpaceB612"
+    icon = "/img/asteroid.png"
+    iconHeight = 92
+
+  [params.homeInfoParams]
+    Title = "Niektoré príbehy čítame.<br>Iné v nás zostanú."
+    Content = "Knižný blog o tom, čo čítam."
+
+  [params.profileMode]
+    enabled = false
+
+  [params.assets]
+    disableHLJS = true
+    favicon = "/img/favicon.png"
+    favicon16x16 = "/img/favicon.png"
+    favicon32x32 = "/img/favicon.png"
+    apple_touch_icon = "/img/asteroid.png"
+
+  [[params.socialIcons]]
+    name = "instagram"
+    url = "https://instagram.com/bookspaceb612"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "index.xml"
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 2
+    keys = ["title", "permalink", "summary", "content"]
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  # Každá recenzia navyše vygeneruje podklady pre Instagram:
+  #   slides.html  → jednotlivé štvorce carouselu (screenshotuje ich `npm run ig`)
+  #   caption.txt  → hotový text popisu vrátane hashtagov
+  page = ["HTML", "igslides", "igcaption"]
+
+[outputFormats]
+  [outputFormats.igslides]
+    mediaType = "text/html"
+    baseName = "slides"
+    isHTML = true
+    notAlternative = true
+    permalinkable = false
+  [outputFormats.igcaption]
+    mediaType = "text/plain"
+    baseName = "caption"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = false
+
+[taxonomies]
+  zaner = "zanre"
+  autor = "autori"
+  nalada = "nalady"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+[minify]
+  disableXML = true
+  minifyOutput = true

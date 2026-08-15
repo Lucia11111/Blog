@@ -1,0 +1,13 @@
+{{- /* Vypíše všetky citáty zo front matteru pod sebou.  Použitie:  {{< citaty >}} */ -}}
+
+{{- $cs := .Page.Params.citaty | default slice -}}
+{{- if $cs -}}
+<div class="b612-citaty">
+  {{- range $cs }}
+  <blockquote class="b612-citat">
+    <p>{{ .text | markdownify }}</p>
+    {{- if .strana }}<cite>s. {{ .strana }}</cite>{{ end }}
+  </blockquote>
+  {{- end }}
+</div>
+{{- end -}}

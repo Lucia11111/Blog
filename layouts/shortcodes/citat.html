@@ -1,0 +1,17 @@
+{{- /* Vypíše jeden citát zo zoznamu `citaty:` vo front matteri.
+       Použitie:  {{< citat 1 >}}   (číslujeme od 1)
+       Voliteľne prepíšeš stranu:  {{< citat 1 strana="112" >}}
+       Citát mimo front matteru napíš normálnym markdownom cez „>". */ -}}
+
+{{- $i := int (.Get 0 | default 1) -}}
+{{- $c := index (.Page.Params.citaty | default slice) (sub $i 1) -}}
+
+{{- with $c -}}
+  {{- $strana := $.Get "strana" | default .strana -}}
+<blockquote class="b612-citat">
+  <p>{{ .text | markdownify }}</p>
+  {{- with $strana }}<cite>s. {{ . }}</cite>{{ end }}
+</blockquote>
+{{- else -}}
+  {{- warnf "citat: stránka %q nemá citát č. %d" $.Page.File.Path $i -}}
+{{- end -}}

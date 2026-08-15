@@ -1,0 +1,83 @@
+{{- define "main" }}
+
+{{- if (and .IsHome site.Params.homeInfoParams) }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{- if not .IsHome }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}<div class="post-description">{{ .Description }}</div>{{ end }}
+</header>
+{{- end }}
+
+{{- if .Content }}
+<div class="post-content">{{ .Content }}</div>
+{{- end }}
+
+{{- $pages := union .RegularPages .Sections }}
+{{- if .IsHome }}
+{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- end }}
+{{- $paginator := .Paginate $pages }}
+
+<div class="b612-zoznam">
+{{- range $paginator.Pages }}
+  {{- $res := .Resources.GetMatch (.Params.obalka | default "obalka.*") -}}
+  {{- $k := .Params.kompas -}}
+  {{- $id := anchorize .RelPermalink -}}
+
+  <article class="b612-polozka">
+    <a class="b612-polozka__odkaz" href="{{ .RelPermalink }}" aria-label="{{ .Title }}"></a>
+
+    <div class="b612-polozka__obalka">
+      {{- with $res }}
+      {{- $thumb := . }}
+      {{- if ge .Width 700 }}{{ $thumb = .Resize "480x webp q86" }}{{ end }}
+      <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}"
+           alt="{{ $.Page.Params.nazovKnihy | default $.Page.Title }}" loading="lazy">
+      {{- else }}
+      <div class="b612-polozka__bezobalky" aria-hidden="true">{{ substr (.Params.nazovKnihy | default .Title) 0 1 }}</div>
+      {{- end }}
+    </div>
+
+    <div class="b612-polozka__text">
+      <h2>{{ .Params.nazovKnihy | default .Title }}{{ if .Draft }} <span class="b612-draft">rozpísané</span>{{ end }}</h2>
+      {{- with .Params.autor }}<div class="b612-polozka__autor">{{ . }}</div>{{ end }}
+
+      <p class="b612-polozka__myslienka">
+        {{- with .Params.hlavnaMyslienka }}{{ . }}
+        {{- else }}{{ with .Params.podtitul }}{{ . }}{{ else }}{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}…{{ end }}{{ end }}{{ end -}}
+      </p>
+
+      <div class="b612-polozka__meta">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (.Site.Params.DateFormat | default "2. 1. 2006") }}</time>
+        {{- with .Params.zanre }} · {{ delimit (first 2 .) " · " }}{{ end }}
+      </div>
+    </div>
+
+    {{- with $k }}
+    <div class="b612-polozka__kompas" title="B612 Compass">
+      {{ partial "b612/kompas-svg.html" (dict "kompas" . "labels" "false" "id" (printf "z-%s" $id)) }}
+    </div>
+    {{- end }}
+  </article>
+{{- end }}
+</div>
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">«&nbsp;{{ i18n "prev_page" }}</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }}&nbsp;»</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}{{/* end main */}}

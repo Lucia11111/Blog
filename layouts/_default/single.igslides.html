@@ -1,0 +1,328 @@
+{{- /* ═══════════════════════════════════════════════════════════════════
+     Podklad pre Instagram carousel. Hugo z každej recenzie vygeneruje
+     tento súbor (public/.../slides.html) a `npm run ig` z neho odfotí
+     jednotlivé štvorce 1080×1350.
+
+     Každý slide je <section class="s" id="sN">. Zobrazuje sa vždy len ten,
+     na ktorý ukazuje fragment v URL (#s3) — vďaka tomu vie Chrome odfotiť
+     jeden slide na jeden screenshot.
+     ═══════════════════════════════════════════════════════════════════ */ -}}
+
+{{- $b := index site.Data "b612" -}}
+{{- $p := .Params -}}
+{{- $k := $p.kompas -}}
+{{- if not (and $k (in (slice "knihy" "books") .Section)) -}}
+{{/* stránka nie je recenzia knihy — negenerujeme nič */}}
+{{- else -}}
+{{- $nazov := $p.nazovKnihy | default .Title -}}
+{{- $citaty := where ($p.citaty | default slice) "text" "!=" "" -}}
+{{- $cover := "" -}}
+{{- with $.Resources.GetMatch ($p.obalka | default "obalka.*") }}{{ $cover = path.Base .RelPermalink }}{{ end -}}
+{{- $sum := 0.0 -}}
+{{- range $b.compass.axes }}{{ $sum = add $sum (float (index $k .key | default 0)) }}{{ end -}}
+{{- $celkom := div $sum 4.0 -}}
+{{- $pal := $b.palette -}}
+{{- /* Logo vkladáme priamo do súboru (base64), aby slides.html fungoval
+       aj keď ho prehliadač otvorí z disku pri fotení obrázkov. */ -}}
+{{- $logo := "" -}}
+{{- with resources.Get "img/b612-lockup.png" }}{{ $logo = printf "data:%s;base64,%s" .MediaType.Type (.Content | base64Encode) }}{{ end -}}
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ $nazov }} — slides</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: {{ $b.instagram.width }}px;
+    height: {{ $b.instagram.height }}px;
+    overflow: hidden;
+    background: {{ $pal.navyDeep }};
+  }
+
+  :root {
+    --navy: {{ $pal.navyDeep }};
+    --navy-soft: {{ $pal.navySoft }};
+    --cream: {{ $pal.cream }};
+    --cream-dim: {{ $pal.creamDim }};
+    --gold: {{ $pal.gold }};
+    --gold-soft: {{ $pal.goldSoft }};
+    --rose: {{ $pal.rose }};
+    --muted: {{ $pal.muted }};
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  /* ── rámec spoločný pre všetky slidy ───────────────────────────── */
+  .s {
+    display: none;
+    position: relative;
+    width: {{ $b.instagram.width }}px;
+    height: {{ $b.instagram.height }}px;
+    background: var(--navy);
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .s:target { display: flex; }
+  /* bez fragmentu v URL ukáž prvý slide */
+  body:not(:has(.s:target)) #s1 { display: flex; }
+
+  .hviezdy {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .ramcek {
+    position: absolute;
+    inset: 44px;
+    border: 1px solid var(--gold);
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  /* logo v päte každého obrázka */
+  .znacka {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 78px;
+    width: 330px;
+    opacity: 0.95;
+  }
+
+  .znacka img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .obsah {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 130px 120px 210px;
+    text-align: center;
+  }
+
+  .stitok {
+    font-family: var(--sans);
+    font-size: 20px;
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+    color: var(--gold);
+    margin-bottom: 34px;
+  }
+
+  .linka {
+    width: 96px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin: 34px auto;
+  }
+
+  /* ── slide 1: obálka ───────────────────────────────────────────── */
+  #s1 .obsah { padding: 116px 110px 200px; }
+  /* obálky sú priehľadné PNG s vlastným tieňom — rámček ani box-shadow
+     by za nimi nakreslili obdĺžnik */
+  #s1 .obalka {
+    max-height: 720px;
+    max-width: 480px;
+    width: auto;
+    margin-bottom: 58px;
+    filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.55));
+  }
+  #s1 .nazov {
+    font-family: var(--serif);
+    font-size: 68px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  #s1 .nazov.dlhy { font-size: 54px; }
+  #s1 .autor {
+    font-family: var(--sans);
+    font-size: 25px;
+    letter-spacing: 0.24em;
+    text-indent: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-top: 30px;
+  }
+
+  /* ── slide 2: veta, ktorá to celé zhrnie ───────────────────────── */
+  .veta {
+    font-family: var(--serif);
+    font-size: 54px;
+    line-height: 1.35;
+    font-style: italic;
+  }
+  .veta.dlha { font-size: 44px; }
+  .veta.velmiDlha { font-size: 37px; }
+
+  /* ── slide: kompas ─────────────────────────────────────────────── */
+  .kompas-obal { width: 760px; }
+  .kompas-obal svg { width: 100%; height: auto; display: block; }
+
+  /* farby grafu na nočnej oblohe (rovnaké triedy ako na webe) */
+  .kmp-mriezka { fill: none; stroke: var(--gold); stroke-opacity: 0.16; stroke-width: 1; stroke-dasharray: 2 5; }
+  .kmp-mriezka--vonkajsia { stroke-opacity: 0.3; stroke-dasharray: none; }
+  .kmp-os { stroke: var(--gold); stroke-opacity: 0.3; stroke-width: 1; }
+  .kmp-plocha { stroke: var(--gold); stroke-width: 2.5; stroke-linejoin: round; }
+  .kmp-stop-in { stop-color: var(--gold); stop-opacity: 0.38; }
+  .kmp-stop-out { stop-color: var(--gold); stop-opacity: 0.06; }
+  .kmp-bod { fill: var(--gold-soft); }
+  .kmp-popis { fill: var(--gold); font-family: var(--serif); }
+  .kmp-cislo { fill: var(--gold-soft); fill-opacity: 0.85; font-family: var(--sans); font-weight: 600; }
+  .skore {
+    font-family: var(--serif);
+    font-size: 46px;
+    color: var(--gold);
+    margin-top: 18px;
+  }
+  .kniha-mala {
+    font-family: var(--sans);
+    font-size: 21px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-top: 22px;
+  }
+  .osi {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 0 46px;
+    margin-top: 26px;
+    font-family: var(--sans);
+    font-size: 19px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .osi b { display: block; color: var(--cream); font-size: 30px; margin-top: 6px; letter-spacing: 0; }
+
+  /* ── slidy s citátmi ───────────────────────────────────────────── */
+  .uvodzovka {
+    font-family: var(--serif);
+    font-size: 150px;
+    line-height: 0.6;
+    color: var(--gold);
+    opacity: 0.45;
+    margin-bottom: 30px;
+  }
+  .citat {
+    font-family: var(--serif);
+    font-size: 50px;
+    line-height: 1.42;
+    font-style: italic;
+  }
+  .citat.dlhy { font-size: 41px; }
+  .citat.velmiDlhy { font-size: 34px; }
+  .zdroj {
+    font-family: var(--sans);
+    font-size: 21px;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    margin-top: 44px;
+  }
+
+  /* ── posledný slide ────────────────────────────────────────────── */
+  .zaver {
+    font-family: var(--serif);
+    font-size: 46px;
+    line-height: 1.42;
+  }
+  .cta {
+    font-family: var(--sans);
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    color: var(--gold-soft);
+    margin-top: 52px;
+    line-height: 1.7;
+  }
+  .cta span { color: var(--muted); display: block; font-size: 20px; letter-spacing: 0.24em; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+
+{{/* ───────────────────────── 1 · obálka ───────────────────────── */}}
+<section class="s" id="s1">
+  {{ partial "b612/hviezdy.html" . }}
+  <div class="ramcek"></div>
+  <div class="obsah">
+    {{- if $cover }}<img class="obalka" src="{{ $cover }}" alt="">{{ end }}
+    <div class="nazov{{ if gt (len $nazov) 26 }} dlhy{{ end }}">{{ $nazov }}</div>
+    {{- with $p.autor }}<div class="autor">{{ . }}</div>{{ end }}
+  </div>
+  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
+</section>
+
+{{/* ───────────────────────── 2 · veta ─────────────────────────── */}}
+{{- $veta := $p.podtitul | default $p.description -}}
+{{- if $veta }}
+<section class="s" id="s2">
+  {{ partial "b612/hviezdy.html" . }}
+  <div class="ramcek"></div>
+  <div class="obsah">
+    <div class="stitok">{{ if eq .Language.Lang "en" }}THE BOOK IN ONE SENTENCE{{ else }}KNIHA V JEDNEJ VETE{{ end }}</div>
+    <div class="veta{{ if gt (len $veta) 90 }} dlha{{ end }}{{ if gt (len $veta) 150 }} velmiDlha{{ end }}">{{ $veta }}</div>
+  </div>
+  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
+</section>
+{{- end }}
+
+{{/* ───────────────────────── 3 · kompas ───────────────────────── */}}
+<section class="s" id="s3">
+  {{ partial "b612/hviezdy.html" . }}
+  <div class="ramcek"></div>
+  <div class="obsah">
+    <div class="stitok">B612 COMPASS</div>
+    <div class="kompas-obal">
+      {{ partial "b612/kompas-svg.html" (dict "kompas" $k "id" "ig" "font" 26) }}
+    </div>
+    <div class="kniha-mala">{{ $nazov }}{{ with $p.autor }} · {{ . }}{{ end }}</div>
+  </div>
+  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
+</section>
+
+{{/* ───────────────────────── 4..n · citáty ────────────────────── */}}
+{{- range $i, $c := $citaty }}
+<section class="s" id="s{{ add $i 4 }}">
+  {{ partial "b612/hviezdy.html" . }}
+  <div class="ramcek"></div>
+  <div class="obsah">
+    <div class="uvodzovka">&ldquo;</div>
+    <div class="citat{{ if gt (len $c.text) 120 }} dlhy{{ end }}{{ if gt (len $c.text) 220 }} velmiDlhy{{ end }}">{{ $c.text }}</div>
+    <div class="zdroj">
+      {{ $nazov }}{{ with $p.autor }} · {{ . }}{{ end }}{{ with $c.strana }} · s. {{ . }}{{ end }}
+    </div>
+  </div>
+  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
+</section>
+{{- end }}
+
+{{/* ───────────────────────── posledný · záver ─────────────────── */}}
+<section class="s" id="s{{ add (len $citaty) 4 }}">
+  {{ partial "b612/hviezdy.html" . }}
+  <div class="ramcek"></div>
+  <div class="obsah">
+    {{- with $p.zaver }}
+    <div class="stitok">{{ if eq $.Language.Lang "en" }}IN SHORT{{ else }}ZÁVEROM{{ end }}</div>
+    <div class="zaver">{{ . }}</div>
+    <div class="linka"></div>
+    {{- end }}
+    <div class="cta">
+      {{ if eq .Language.Lang "en" }}Full review on the blog{{ else }}Celá recenzia na blogu{{ end }}
+      <span>{{ $b.brand.handle }}</span>
+    </div>
+  </div>
+  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
+</section>
+
+</body>
+</html>
+{{- end -}}

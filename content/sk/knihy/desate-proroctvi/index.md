@@ -1,7 +1,7 @@
 ---
 title: "Desáté proroctví"
 date: 2026-08-15
-draft: true
+draft: false
 
 nazovKnihy: "Desáté proroctví"
 autor: "James Redfield"

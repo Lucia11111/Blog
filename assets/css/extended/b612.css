@@ -422,19 +422,10 @@ h1, h2, h3, h4,
     flex-basis: 88px;
     width: 88px;
   }
-  /* kompas vedľa textu by na mobile stlačil názov na dve slabiky,
-     preto ide pod celú dlaždicu a zostane čitateľný */
+  /* Na úzkej obrazovke kompas z dlaždice vynechávame — vedľa textu
+     stláčal názov a pod textom len visel. Na detaile knihy ostáva. */
   .b612-polozka__kompas {
-    order: 3;
-    flex: 0 0 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
-
-  .b612-polozka__kompas svg {
-    width: 108px;
+    display: none;
   }
   .b612-polozka__text h2 {
     font-size: 1.3rem;

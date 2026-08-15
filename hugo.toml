@@ -110,7 +110,7 @@ enableInlineShortcodes = true
 
   [params.label]
     text = "BookSpaceB612"
-    icon = "/img/asteroid.png"
+    icon = "img/asteroid.png"
     iconHeight = 92
 
   [params.homeInfoParams]
@@ -122,10 +122,10 @@ enableInlineShortcodes = true
 
   [params.assets]
     disableHLJS = true
-    favicon = "/img/favicon.png"
-    favicon16x16 = "/img/favicon.png"
-    favicon32x32 = "/img/favicon.png"
-    apple_touch_icon = "/img/asteroid.png"
+    favicon = "img/favicon.png"
+    favicon16x16 = "img/favicon.png"
+    favicon32x32 = "img/favicon.png"
+    apple_touch_icon = "img/asteroid.png"
 
   [[params.socialIcons]]
     name = "instagram"

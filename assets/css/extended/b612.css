@@ -172,6 +172,55 @@ h1, h2, h3, h4,
   color: var(--b612-zlata-svetla);
 }
 
+
+/* ── mobil: hlavička sa musí zalomiť ──────────────────────────────── */
+/* Vysoká hlavička s veľkým asteroidom sa na úzku obrazovku nezmestí
+   vedľa menu, preto tu ide logo na prvý riadok a menu pod neho. */
+@media (max-width: 760px) {
+  .nav {
+    height: auto;
+    flex-wrap: wrap;
+    line-height: 1.4;
+    padding-block: 0.7rem;
+    row-gap: 0.5rem;
+  }
+
+  .logo a {
+    font-size: 1.4rem;
+  }
+
+  .logo a img {
+    height: 54px;
+    margin-inline-end: 11px;
+  }
+
+  /* logo zaberie celý prvý riadok, menu a prepínač jazyka sú na druhom */
+  .logo {
+    width: 100%;
+  }
+
+  #menu {
+    flex: 1;
+    min-width: 0;
+    /* rovnaké odsadenie od okraja ako má logo */
+    margin-inline-start: var(--gap);
+    margin-inline-end: 0;
+    gap: 1.35rem;
+    padding-inline: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #menu a {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .logo-switches {
+    margin-inline-start: auto;
+  }
+}
+
 /* ── domovská stránka ─────────────────────────────────────────────── */
 .home-info .entry-content,
 .first-entry .entry-content {
@@ -373,10 +422,19 @@ h1, h2, h3, h4,
     flex-basis: 88px;
     width: 88px;
   }
+  /* kompas vedľa textu by na mobile stlačil názov na dve slabiky,
+     preto ide pod celú dlaždicu a zostane čitateľný */
   .b612-polozka__kompas {
-    flex-basis: 64px;
-    width: 64px;
-    align-self: flex-start;
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .b612-polozka__kompas svg {
+    width: 108px;
   }
   .b612-polozka__text h2 {
     font-size: 1.3rem;

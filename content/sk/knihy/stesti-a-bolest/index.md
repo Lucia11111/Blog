@@ -1,7 +1,7 @@
 ---
 title: "Štěstí a bolest"
 date: 2026-08-22
-draft: true
+draft: false
 
 nazovKnihy: "Štěstí a bolest v současném světě"
 autor: "Pavel Špatenka"
@@ -20,16 +20,15 @@ kompas:
   depth: 9
 
 # Veta, ktorá ide na domovskú stránku aj na Instagram
-hlavnaMyslienka: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít."
+hlavnaMyslienka: "Oslobodenie neprichádza tým, že sa tieto momenty snažíme udržať, ale tým, že si uvedomíme ich prirodzenosť a necháme ich prísť a odísť bez toho, aby sme sa k nim pripútali."
 
-# TODO: podtitul (2. obrázok carouselu) aj záver (posledný) sú moje slová — prepíš ich.
-podtitul: "Budhizmus a západná psychológia vedľa seba, bez toho, aby jedna vyvracala druhú — a bolesť ako niečo, čo k životu jednoducho patrí."
+podtitul: "Oslobodenie neprichádza tým, že sa tieto momenty snažíme udržať, ale tým, že si uvedomíme ich prirodzenosť a necháme ich prísť a odísť bez toho, aby sme sa k nim pripútali."
 
 citaty:
   - text: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali."
     strana: 104
 
-zaver: "Pre tých, ktorí sa chcú na svoj život pozrieť trochu inak — a nepotrebujú na to päťsto strán."
+zaver: "Keď by som si chcela rýchlo pripomenúť, ako nám môže budhizmus pomáhať v každodennom živote."
 ---
 
 {{< kniha >}}
@@ -48,7 +47,7 @@ Celou knihou navyše prechádza príbeh Marka, úspešného muža, ktorý sa ned
 
 Kniha je prehľadná, zrozumiteľná a podľa mňa pekne povzbudzuje pozerať sa na vlastný život a na seba trochu inak. Hoci je plná informácií o budhizme, zostáva veľmi čitateľná a ani svojím obsahom nie je objemná.
 
-**Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali.**
+**Oslobodenie neprichádza tým, že sa tieto momenty snažíme udržať, ale tým, že si uvedomíme ich prirodzenosť a necháme ich prísť a odísť bez toho, aby sme sa k nim pripútali.**
 
 ## Hodnotenie
 

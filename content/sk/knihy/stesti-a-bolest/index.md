@@ -14,8 +14,8 @@ nalady: ["všímavosť", "prijatie"]
 
 # B612 Compass — 0 až 10
 kompas:
-  style: 7
-  story: 7
+  style: 6
+  story: 6
   echo: 9
   depth: 9
 

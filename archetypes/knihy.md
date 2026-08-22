@@ -38,7 +38,8 @@ citaty:
   - text: ""
     strana:
 
-# ── Záverečná veta carouselu (odporúčanie / komu knihu dať) ──────
+# ── Posledný obrázok carouselu ──────────────────────────────────
+# Tá istá veta, akú napíšeš dole do „Kedy by som ju otvorila znova".
 zaver: ""
 ---
 

@@ -28,6 +28,8 @@ citaty:
   - text: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali."
     strana: 104
 
+# Posledný obrázok carouselu — tá istá veta ako v sekcii
+# „Kedy by som ju otvorila znova" dole v texte.
 zaver: "Keď by som si chcela rýchlo pripomenúť, ako nám môže budhizmus pomáhať v každodennom živote."
 ---
 

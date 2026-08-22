@@ -29,7 +29,9 @@ citaty:
   - text: "Chápal jsem jen, že její osobní vize je součástí širší vize, která obsahovala minulost i budoucnost celého lidstva."
     strana: 84
 
-zaver: "Pre tých, ktorí Celestínske proroctvo dočítali s pocitom, že sa to ešte neskončilo."
+# Posledný obrázok carouselu — tá istá veta ako v sekcii
+# „Kedy by som ju otvorila znova" dole v texte.
+zaver: "Keď mám chuť na pokojné čítanie a premýšľanie a mám viac času ponoriť sa do príbehu a myšlienok."
 ---
 
 {{< kniha >}}

@@ -1,0 +1,62 @@
+---
+title: "Štěstí a bolest"
+date: 2026-08-22
+draft: true
+
+nazovKnihy: "Štěstí a bolest v současném světě"
+autor: "Pavel Špatenka"
+precitane: "august 2026"
+ukazky: "ukazka-*"
+
+zanre: ["duchovná literatúra", "psychológia"]
+autori: ["Pavel Špatenka"]
+nalady: ["všímavosť", "prijatie"]
+
+# B612 Compass — 0 až 10
+kompas:
+  style: 8
+  story: 7
+  echo: 9
+  depth: 9
+
+# Veta, ktorá ide na domovskú stránku aj na Instagram
+hlavnaMyslienka: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít."
+
+# TODO: podtitul (2. obrázok carouselu) aj záver (posledný) sú moje slová — prepíš ich.
+podtitul: "Budhizmus a západná psychológia vedľa seba, bez toho, aby jedna vyvracala druhú — a bolesť ako niečo, čo k životu jednoducho patrí."
+
+citaty:
+  - text: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali."
+    strana: 104
+
+zaver: "Pre tých, ktorí sa chcú na svoj život pozrieť trochu inak — a nepotrebujú na to päťsto strán."
+---
+
+{{< kniha >}}
+
+## O knihe
+
+Knihu som čítala po absolvovaní týždňového seminára Pavla Špatenku *Všímavé sebepoznání*, takže pre mňa bola krásnym zopakovaním a zároveň pripomenutím toho, čo sme sa na seminári učili.
+
+Najviac sa mi páčilo, ako citlivo prepája budhizmus so západnou psychológiou bez toho, aby jednu alebo druhú stranu stavala proti sebe. Veľmi dobre podľa mňa vysvetľuje pohľad budhizmu na bolesť — že bolesť jednoducho patrí k životu a bude jeho súčasťou. Neznamená to však, že máme v bolesti žiť. Skôr že predstava, že sa jej môžeme úplne vyhnúť, je nereálna. Rovnako ako lipnutie na šťastí a príjemných pocitoch, ktoré sú tiež premenlivé, môže byť zdrojom utrpenia.
+
+Veľmi silná pre mňa bola myšlienka všímať si, čo nám naozaj hovorí naše psyché, a sledovať to bez hodnotenia. Nechať veci, ktoré sa v nás objavujú, chvíľu byť tým, čím sú, namiesto toho, aby sme ich hneď označili ako dobré alebo zlé a snažili sa ich zmeniť.
+
+Kniha veľmi pekne vysvetľuje štyri Buddhove ušľachtilé pravdy — od prijatia toho, že bolesť a utrpenie existujú, cez pochopenie ich príčin až po možnosť oslobodenia od nich a cestu, ktorá k tomu vedie. Práve spôsob, akým sú tieto myšlienky vysvetlené, mi prišiel veľmi zrozumiteľný a praktický.
+
+Celou knihou navyše prechádza príbeh Marka, úspešného muža, ktorý sa nedokáže zastaviť. Práve vďaka nemu zostávajú budhistické princípy spojené s konkrétnym životom a nie sú len teóriou.
+
+Kniha je prehľadná, zrozumiteľná a podľa mňa pekne povzbudzuje pozerať sa na vlastný život a na seba trochu inak. Hoci je plná informácií o budhizme, zostáva veľmi čitateľná a ani svojím obsahom nie je objemná.
+
+**Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali.**
+
+## Hodnotenie
+
+{{< kompas >}}
+
+## Komu ju odporúčam
+
+<!-- Placeholder — sem príde tvoj text. Toto je lorem ipsum, výplňový text,
+     ktorý sa používa, kým nie je hotový ten skutočný. Prepíš ho. -->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.

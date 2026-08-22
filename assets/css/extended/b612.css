@@ -285,16 +285,22 @@ h1, h2, h3, h4,
   z-index: 1;
 }
 
+/* Obálky majú rôzne pomery strán. Keby mali rovnakú šírku, každá dlaždica
+   by bola inak vysoká — preto im zjednocujeme výšku. */
 .b612-polozka__obalka {
-  flex: 0 0 128px;
-  width: 128px;
+  flex: 0 0 auto;
+  width: auto;
+  display: flex;
+  align-items: center;
 }
 
 /* tieň dávame filtrom, nie box-shadow — obálky sú často priehľadné PNG
    a box-shadow by za nimi nakreslil sivý obdĺžnik */
 .b612-polozka__obalka img {
-  width: 100%;
-  height: auto;
+  height: 176px;
+  width: auto;
+  max-width: 132px;
+  object-fit: contain;
   display: block;
   filter: drop-shadow(0 5px 14px rgba(16, 27, 45, 0.22));
   transition: transform 0.22s ease, filter 0.22s ease;
@@ -323,10 +329,15 @@ h1, h2, h3, h4,
   min-width: 0;
 }
 
+/* Názov drží jeden riadok — dlhý by inak natiahol celú dlaždicu
+   a knihy pod sebou by prestali byť rovnaké. */
 .b612-polozka__text h2 {
   margin: 0;
-  font-size: 1.62rem;
-  line-height: 1.22;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .b612-polozka:hover .b612-polozka__text h2 {
@@ -334,12 +345,14 @@ h1, h2, h3, h4,
 }
 
 .b612-draft {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 0.9rem;
   font-family: var(--b612-sans);
   font-size: 0.62rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  vertical-align: middle;
   color: var(--b612-rose);
   border: 1px solid currentColor;
   border-radius: 3px;
@@ -396,12 +409,16 @@ h1, h2, h3, h4,
 }
 
 .b612-polozka__myslienka {
-  margin: 0.85rem 0 0;
+  margin: 0.7rem 0 0;
   font-family: var(--b612-serif);
-  font-size: 1.06rem;
+  font-size: 1.02rem;
   font-style: italic;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .b612-polozka__meta {
@@ -419,13 +436,32 @@ h1, h2, h3, h4,
     flex-wrap: wrap;
   }
   .b612-polozka__obalka {
-    flex-basis: 88px;
-    width: 88px;
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .b612-polozka__obalka img {
+    height: 132px;
+    max-width: 96px;
   }
   /* Na úzkej obrazovke kompas z dlaždice vynechávame — vedľa textu
      stláčal názov a pod textom len visel. Na detaile knihy ostáva. */
   .b612-polozka__kompas {
     display: none;
+  }
+
+  /* Štítok „rozpísané" je len pracovná pomôcka pri písaní — rozpísané
+     knihy sa na web aj tak nezverejňujú. Na mobile zavadzia, preč s ním. */
+  .b612-draft {
+    display: none;
+  }
+
+  /* na úzkej obrazovke vidíš aj tak jednu knihu naraz, takže názov
+     nech sa radšej celý zalomí, než aby sa orezal */
+  .b612-polozka__text h2 {
+    white-space: normal;
+    overflow: visible;
+    font-size: 1.25rem;
   }
   .b612-polozka__text h2 {
     font-size: 1.3rem;

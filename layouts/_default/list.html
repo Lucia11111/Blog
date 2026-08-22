@@ -44,7 +44,9 @@
     </div>
 
     <div class="b612-polozka__text">
-      <h2>{{ .Params.nazovKnihy | default .Title }}{{ if .Draft }} <span class="b612-draft">rozpísané</span>{{ end }}</h2>
+      {{- /* Do dlaždice ide krátky názov (`title`), plný (`nazovKnihy`)
+             je až v karte na detaile knihy — inak by sa dlhý orezal. */ -}}
+      <h2>{{ .Title }}</h2>
       {{- with .Params.autor }}<div class="b612-polozka__autor">{{ . }}</div>{{ end }}
 
       <p class="b612-polozka__myslienka">
@@ -63,6 +65,8 @@
       {{ partial "b612/kompas-svg.html" (dict "kompas" . "labels" "false" "id" (printf "z-%s" $id)) }}
     </div>
     {{- end }}
+
+    {{- if .Draft }}<span class="b612-draft">rozpísané</span>{{ end }}
   </article>
 {{- end }}
 </div>

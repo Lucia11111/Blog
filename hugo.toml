@@ -28,7 +28,7 @@ enableInlineShortcodes = true
     weight = 1
     title = "BookSpaceB612"
     [languages.sk.params]
-      description = "Knižný blog o príbehoch, ktoré v nás nechajú ozvenu."
+      description = "Niektoré príbehy čítame. Iné v nás zostanú."
       [languages.sk.params.homeInfoParams]
         Title = "Niektoré príbehy čítame.<br>Iné v nás zostanú."
         Content = "Knižný blog o tom, čo čítam."
@@ -60,7 +60,7 @@ enableInlineShortcodes = true
     weight = 2
     title = "BookSpaceB612"
     [languages.en.params]
-      description = "A book blog about stories that leave an echo."
+      description = "Some stories we read. Others stay with us."
       [languages.en.params.homeInfoParams]
         Title = "Some stories we read.<br>Others stay with us."
         Content = "A book blog about what I read."

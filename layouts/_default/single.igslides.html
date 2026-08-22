@@ -128,11 +128,28 @@
 
   /* ── slide 1: obálka ───────────────────────────────────────────── */
   #s1 .obsah { padding: 116px 110px 200px; }
+
+  /* Jemná svetelná žiara za knihou. Tmavé obálky by sa inak na nočnej
+     oblohe strácali — takto vyzerá kniha nasvietená. */
+  #s1 .ziara {
+    position: absolute;
+    left: 50%;
+    top: 34%;
+    transform: translate(-50%, -50%);
+    width: 820px;
+    height: 820px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(247, 242, 231, 0.22) 0%,
+      rgba(247, 242, 231, 0.08) 42%,
+      transparent 68%);
+    pointer-events: none;
+  }
   /* obálky sú priehľadné PNG s vlastným tieňom — rámček ani box-shadow
      by za nimi nakreslili obdĺžnik */
   #s1 .obalka {
-    max-height: 720px;
-    max-width: 480px;
+    max-height: 560px;
+    max-width: 400px;
     width: auto;
     margin-bottom: 58px;
     filter: drop-shadow(0 26px 60px rgba(0, 0, 0, 0.55));
@@ -251,6 +268,7 @@
 {{/* ───────────────────────── 1 · obálka ───────────────────────── */}}
 <section class="s" id="s1">
   {{ partial "b612/hviezdy.html" . }}
+  <div class="ziara"></div>
   <div class="ramcek"></div>
   <div class="obsah">
     {{- if $cover }}<img class="obalka" src="{{ $cover }}" alt="">{{ end }}

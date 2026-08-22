@@ -65,8 +65,6 @@
       {{ partial "b612/kompas-svg.html" (dict "kompas" . "labels" "false" "id" (printf "z-%s" $id)) }}
     </div>
     {{- end }}
-
-    {{- if .Draft }}<span class="b612-draft">rozpísané</span>{{ end }}
   </article>
 {{- end }}
 </div>

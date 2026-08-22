@@ -344,21 +344,6 @@ h1, h2, h3, h4,
   color: var(--b612-zlata);
 }
 
-.b612-draft {
-  position: absolute;
-  right: 1.1rem;
-  bottom: 0.9rem;
-  font-family: var(--b612-sans);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--b612-rose);
-  border: 1px solid currentColor;
-  border-radius: 3px;
-  padding: 0.15em 0.5em;
-}
-
 .b612-polozka__autor {
   margin-top: 0.32rem;
   font-family: var(--b612-sans);
@@ -421,12 +406,16 @@ h1, h2, h3, h4,
   overflow: hidden;
 }
 
+/* dátum a žánre držia jeden riadok — inak by dlaždica narástla */
 .b612-polozka__meta {
   margin-top: 0.8rem;
   font-family: var(--b612-sans);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
+  font-size: 0.76rem;
+  letter-spacing: 0.01em;
   color: var(--b612-siva);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 620px) {
@@ -447,12 +436,6 @@ h1, h2, h3, h4,
   /* Na úzkej obrazovke kompas z dlaždice vynechávame — vedľa textu
      stláčal názov a pod textom len visel. Na detaile knihy ostáva. */
   .b612-polozka__kompas {
-    display: none;
-  }
-
-  /* Štítok „rozpísané" je len pracovná pomôcka pri písaní — rozpísané
-     knihy sa na web aj tak nezverejňujú. Na mobile zavadzia, preč s ním. */
-  .b612-draft {
     display: none;
   }
 

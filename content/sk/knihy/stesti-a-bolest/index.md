@@ -54,9 +54,6 @@ Kniha je prehľadná, zrozumiteľná a podľa mňa pekne povzbudzuje pozerať sa
 
 {{< kompas >}}
 
-## Komu ju odporúčam
+## Kedy by som ju otvorila znova
 
-<!-- Placeholder — sem príde tvoj text. Toto je lorem ipsum, výplňový text,
-     ktorý sa používa, kým nie je hotový ten skutočný. Prepíš ho. -->
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Keď by som si chcela rýchlo pripomenúť, ako nám môže budhizmus pomáhať v každodennom živote.

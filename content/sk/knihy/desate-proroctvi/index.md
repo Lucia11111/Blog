@@ -52,9 +52,6 @@ Ak by som mala nájsť jedno negatívum, bol to pre mňa trochu zbytočne natiah
 
 {{< kompas >}}
 
-## Komu ju odporúčam
+## Kedy by som ju otvorila znova
 
-<!-- Placeholder — sem príde tvoj text. Toto je lorem ipsum, výplňový text,
-     ktorý sa používa, kým nie je hotový ten skutočný. Prepíš ho. -->
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Keď mám chuť na pokojné čítanie a premýšľanie a mám viac času ponoriť sa do príbehu a myšlienok.

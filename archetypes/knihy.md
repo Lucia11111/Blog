@@ -52,6 +52,6 @@ myšlienkou** — tú istú, ktorú si napísala hore do `hlavnaMyslienka`.
 
 {{`{{< kompas >}}`}}
 
-## Komu ju odporúčam
+## Kedy by som ju otvorila znova
 
-Komu by som ju dala do rúk a komu radšej nie.
+V akej nálade alebo v akom období by som po nej znova siahla.

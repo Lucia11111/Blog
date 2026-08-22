@@ -46,7 +46,7 @@ V `index.md` je hore hlavička medzi `---`. Podstatné je:
 | `nazovKnihy`, `autor` | karta knihy a Instagram |
 | `kompas:` | štyri hodnoty 0–10 → graf na webe aj na Instagrame |
 | `hlavnaMyslienka` | zhrnutie knihy jednou vetou — dlaždica na domovskej aj 2. obrázok carouselu |
-| `citaty:` | každý citát dostane vlastný obrázok v carouseli |
+| `citaty:` | z každého citátu vznikne samostatný príspevok na Instagram |
 | `zaver` | posledný obrázok carouselu |
 | `draft: true` | kniha je rozpísaná a **nezverejní sa** |
 
@@ -69,8 +69,16 @@ Otvor `http://localhost:1313/`. Stránka sa obnovuje sama pri každej zmene.
 npm run ig
 ```
 
-Výsledok nájdeš v `ig/out/nazov-knihy/` — očíslované PNG a `popis.txt`
-s textom príspevku aj hashtagmi. Nahraj ich v poradí 01, 02, 03…
+Vzniknú dve veci:
+
+**`ig/out/nazov-knihy/`** — carousel ku knihe, štyri obrázky na nočnej
+oblohe: obálka, zhrnutie jednou vetou, B612 Compass, kedy ju otvorím
+znova. Nahraj ich v poradí 01 až 04. Text príspevku je v `popis.txt`.
+
+**`ig/out/citaty/`** — každý citát ako samostatný obrázok na krémovom
+papieri, aby sa v profile striedali s tmavými knižnými postami. Ku
+každému je `.txt` s textom príspevku. Postuj ich jednotlivo, kedykoľvek
+medzi knihami.
 
 ### 7. Zverejni
 
@@ -95,7 +103,8 @@ Asi minútu potrvá, kým sa web prestaví. Priebeh vidíš na GitHube v karte
 | názvy osí kompasu, hashtagy | `data/b612.json` |
 | menu, uvítací text, jazyky | `hugo.toml` |
 | text O blogu | `content/sk/o-blogu.md` |
-| vzhľad Instagram obrázkov | `layouts/_default/single.igslides.html` |
+| vzhľad carouselu ku knihe | `layouts/_default/single.igslides.html` |
+| vzhľad citátových kariet | `layouts/_default/single.igquotes.html` |
 | text popisu pod príspevkom | `layouts/_default/single.igcaption.txt` |
 | kostra novej recenzie | `archetypes/knihy.md` |
 

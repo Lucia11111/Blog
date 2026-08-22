@@ -1,0 +1,22 @@
+{{- $b := index site.Data "b612" -}}
+{{- $p := .Params -}}
+{{- $citaty := where ($p.citaty | default slice) "text" "!=" "" -}}
+{{- if and $citaty (in (slice "knihy" "books") .Section) -}}
+{{- $nazov := $p.nazovKnihy | default .Title -}}
+{{- $en := eq .Language.Lang "en" -}}
+{{- $tags := cond $en $b.instagram.hashtagsEn $b.instagram.hashtagsSk -}}
+{{- range $i, $c := $citaty -}}
+{{ if $i }}
+▬▬▬▬▬▬▬▬▬▬ citát {{ add $i 1 }} ▬▬▬▬▬▬▬▬▬▬
+{{ end }}„{{ $c.text }}"
+
+{{ $nazov }}{{ with $p.autor }} — {{ . }}{{ end }}{{ with $c.strana }}, s. {{ . }}{{ end }}
+
+{{ if $en }}Full review on the blog — link in bio.{{ else }}Celá recenzia na blogu — odkaz v bio.{{ end }}
+
+.
+.
+.
+{{ delimit $tags " " }}
+{{ end }}
+{{- end -}}

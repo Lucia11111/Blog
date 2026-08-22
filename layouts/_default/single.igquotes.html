@@ -1,0 +1,166 @@
+{{- /* ═══════════════════════════════════════════════════════════════════
+     Citátové karty na Instagram — jeden obrázok na jeden citát.
+
+     Na rozdiel od carouselu ku knihe sú na svetlom papieri, aby sa
+     v profile striedali s tmavými knižnými postami.
+
+     Každá karta je <section class="k" id="qN">; `npm run ig` ich odfotí
+     po jednej do ig/out/citaty/.
+     ═══════════════════════════════════════════════════════════════════ */ -}}
+
+{{- $b := index site.Data "b612" -}}
+{{- $p := .Params -}}
+{{- $citaty := where ($p.citaty | default slice) "text" "!=" "" -}}
+{{- if not (and $citaty (in (slice "knihy" "books") .Section)) -}}
+{{/* stránka nemá citáty — negenerujeme nič */}}
+{{- else -}}
+{{- $nazov := $p.nazovKnihy | default .Title -}}
+{{- $pal := $b.palette -}}
+{{- $logo := "" -}}
+{{- with resources.Get "img/b612-lockup.png" }}{{ $logo = printf "data:%s;base64,%s" .MediaType.Type (.Content | base64Encode) }}{{ end -}}
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<title>{{ $nazov }} — citáty</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: {{ $b.instagram.width }}px;
+    height: {{ $b.instagram.height }}px;
+    overflow: hidden;
+    background: #faf6ec;
+  }
+
+  :root {
+    --papier: #faf6ec;
+    --navy: {{ $pal.navy }};
+    --gold: #b8860f;
+    --rose: {{ $pal.rose }};
+    --muted: #8a8378;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .k {
+    display: none;
+    position: relative;
+    width: {{ $b.instagram.width }}px;
+    height: {{ $b.instagram.height }}px;
+    background: var(--papier);
+    color: var(--navy);
+    overflow: hidden;
+  }
+  .k:target { display: flex; }
+  body:not(:has(.k:target)) #q1 { display: flex; }
+
+  /* dvojitý rámček — jemné odlíšenie od knižných obrázkov */
+  .ramcek {
+    position: absolute;
+    inset: 44px;
+    border: 1px solid var(--gold);
+    opacity: 0.45;
+  }
+
+  .ramcek--vnutorny {
+    inset: 52px;
+    opacity: 0.22;
+  }
+
+  .obsah {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 130px 250px;
+    text-align: center;
+  }
+
+  .uvodzovka {
+    font-family: var(--serif);
+    font-size: 170px;
+    line-height: 0.55;
+    color: var(--gold);
+    opacity: 0.35;
+    margin-bottom: 46px;
+  }
+
+  .citat {
+    font-family: var(--serif);
+    font-size: 54px;
+    line-height: 1.44;
+    font-style: italic;
+  }
+  .citat.dlhy { font-size: 44px; }
+  .citat.velmiDlhy { font-size: 36px; }
+
+  .linka {
+    width: 78px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.55;
+    margin: 52px auto 30px;
+  }
+
+  .kniha {
+    font-family: var(--sans);
+    font-size: 23px;
+    letter-spacing: 0.13em;
+    color: var(--navy);
+  }
+
+  .strana {
+    font-family: var(--sans);
+    font-size: 19px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+
+  /* Logo sedí na tmavej plakete — tá zároveň prepája citátové karty
+     s knižnými, ktoré sú celé na nočnej oblohe. */
+  .znacka {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 84px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .znacka span {
+    display: block;
+    background: #031021;
+    padding: 18px 32px;
+    border-radius: 3px;
+  }
+
+  .znacka img {
+    width: 190px;
+    height: auto;
+    display: block;
+  }
+</style>
+</head>
+<body>
+{{- range $i, $c := $citaty }}
+<section class="k" id="q{{ add $i 1 }}">
+  <div class="ramcek"></div>
+  <div class="ramcek ramcek--vnutorny"></div>
+  <div class="obsah">
+    <div class="uvodzovka">&ldquo;</div>
+    <div class="citat{{ if gt (len $c.text) 120 }} dlhy{{ end }}{{ if gt (len $c.text) 230 }} velmiDlhy{{ end }}">{{ $c.text }}</div>
+    <div class="linka"></div>
+    <div class="kniha">{{ $nazov }}{{ with $p.autor }} · {{ . }}{{ end }}</div>
+    {{- with $c.strana }}<div class="strana">STRANA {{ . }}</div>{{ end }}
+  </div>
+  <div class="znacka">{{ with $logo }}<span><img src="{{ . | safeURL }}" alt="BookSpaceB612"></span>{{ end }}</div>
+</section>
+{{- end }}
+</body>
+</html>
+{{- end -}}

@@ -15,7 +15,6 @@
 {{/* stránka nie je recenzia knihy — negenerujeme nič */}}
 {{- else -}}
 {{- $nazov := $p.nazovKnihy | default .Title -}}
-{{- $citaty := where ($p.citaty | default slice) "text" "!=" "" -}}
 {{- $cover := "" -}}
 {{- with $.Resources.GetMatch ($p.obalka | default "obalka.*") }}{{ $cover = path.Base .RelPermalink }}{{ end -}}
 {{- $sum := 0.0 -}}
@@ -290,24 +289,8 @@
   <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
 </section>
 
-{{/* ───────────────────────── 4..n · citáty ────────────────────── */}}
-{{- range $i, $c := $citaty }}
-<section class="s" id="s{{ add $i 4 }}">
-  {{ partial "b612/hviezdy.html" . }}
-  <div class="ramcek"></div>
-  <div class="obsah">
-    <div class="uvodzovka">&ldquo;</div>
-    <div class="citat{{ if gt (len $c.text) 120 }} dlhy{{ end }}{{ if gt (len $c.text) 220 }} velmiDlhy{{ end }}">{{ $c.text }}</div>
-    <div class="zdroj">
-      {{ $nazov }}{{ with $p.autor }} · {{ . }}{{ end }}{{ with $c.strana }} · s. {{ . }}{{ end }}
-    </div>
-  </div>
-  <div class="znacka">{{ with $logo }}<img src="{{ . | safeURL }}" alt="BookSpaceB612">{{ end }}</div>
-</section>
-{{- end }}
-
 {{/* ───────────────────────── posledný · záver ─────────────────── */}}
-<section class="s" id="s{{ add (len $citaty) 4 }}">
+<section class="s" id="s4">
   {{ partial "b612/hviezdy.html" . }}
   <div class="ramcek"></div>
   <div class="obsah">

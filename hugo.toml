@@ -148,7 +148,7 @@ enableInlineShortcodes = true
   # Každá recenzia navyše vygeneruje podklady pre Instagram:
   #   slides.html  → jednotlivé štvorce carouselu (screenshotuje ich `npm run ig`)
   #   caption.txt  → hotový text popisu vrátane hashtagov
-  page = ["HTML", "igslides", "igcaption"]
+  page = ["HTML", "igslides", "igcaption", "igquotes", "igquotescaption"]
 
 [outputFormats]
   [outputFormats.igslides]
@@ -160,6 +160,19 @@ enableInlineShortcodes = true
   [outputFormats.igcaption]
     mediaType = "text/plain"
     baseName = "caption"
+    isPlainText = true
+    notAlternative = true
+    permalinkable = false
+  # citátové karty — jeden obrázok na jeden citát, na svetlom papieri
+  [outputFormats.igquotes]
+    mediaType = "text/html"
+    baseName = "citaty"
+    isHTML = true
+    notAlternative = true
+    permalinkable = false
+  [outputFormats.igquotescaption]
+    mediaType = "text/plain"
+    baseName = "citaty"
     isPlainText = true
     notAlternative = true
     permalinkable = false

@@ -15,7 +15,7 @@
  */
 
 import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, copyFileSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, rmSync, copyFileSync, statSync } from "node:fs";
 import { homedir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -68,18 +68,33 @@ function najdiPrehliadac() {
 
 /* ── zbieranie recenzií ───────────────────────────────────────────── */
 
-function najdiSlidy(dir, najdene = []) {
+function najdiSubory(dir, meno, najdene = []) {
   for (const polozka of readdirSync(dir, { withFileTypes: true })) {
     const plna = path.join(dir, polozka.name);
-    if (polozka.isDirectory()) najdiSlidy(plna, najdene);
-    else if (polozka.name === "slides.html" && statSync(plna).size > 200) najdene.push(plna);
+    if (polozka.isDirectory()) najdiSubory(plna, meno, najdene);
+    else if (polozka.name === meno && statSync(plna).size > 200) najdene.push(plna);
   }
   return najdene;
 }
 
-function pocetSlidov(html) {
+function pocetSekcii(html, predpona) {
   // hugo môže HTML minifikovať, takže id vyzerá raz ako id="s3" a raz ako id=s3
-  return new Set([...html.matchAll(/id="?s(\d+)\b/g)].map((m) => Number(m[1]))).size;
+  const re = new RegExp(`id="?${predpona}(\\d+)\\b`, "g");
+  return new Set([...html.matchAll(re)].map((m) => Number(m[1]))).size;
+}
+
+function odfot(subor, fragment, cesta) {
+  execFileSync(
+    prehliadac,
+    [
+      "--headless", "--disable-gpu", "--hide-scrollbars",
+      "--force-device-scale-factor=1", "--allow-file-access-from-files",
+      "--virtual-time-budget=4000", "--window-size=1080,1350",
+      `--screenshot=${cesta}`,
+      `file://${subor}#${fragment}`,
+    ],
+    { stdio: ["ignore", "ignore", "ignore"] }
+  );
 }
 
 /* ── hlavný beh ───────────────────────────────────────────────────── */
@@ -98,7 +113,7 @@ if (!existsSync(PUBLIC)) {
 }
 
 const prehliadac = najdiPrehliadac();
-let vsetky = najdiSlidy(PUBLIC);
+let vsetky = najdiSubory(PUBLIC, "slides.html");
 
 if (filtre.length) {
   vsetky = vsetky.filter((p) => filtre.some((f) => p.includes(f)));
@@ -118,7 +133,7 @@ for (const slidySubor of vsetky) {
   const cielovy = path.join(VYSTUP, jazyk === "en" ? `${slug}-en` : slug);
 
   const html = readFileSync(slidySubor, "utf8");
-  const pocet = pocetSlidov(html);
+  const pocet = pocetSekcii(html, "s");
   if (!pocet) continue;
 
   rmSync(cielovy, { recursive: true, force: true });
@@ -127,22 +142,7 @@ for (const slidySubor of vsetky) {
   process.stdout.write(`→ ${slug} (${pocet} obrázkov) `);
 
   for (let i = 1; i <= pocet; i++) {
-    const cesta = path.join(cielovy, `${String(i).padStart(2, "0")}.png`);
-    execFileSync(
-      prehliadac,
-      [
-        "--headless",
-        "--disable-gpu",
-        "--hide-scrollbars",
-        "--force-device-scale-factor=1",
-        "--allow-file-access-from-files",
-        "--virtual-time-budget=4000",
-        "--window-size=1080,1350",
-        `--screenshot=${cesta}`,
-        `file://${slidySubor}#s${i}`,
-      ],
-      { stdio: ["ignore", "ignore", "ignore"] }
-    );
+    odfot(slidySubor, `s${i}`, path.join(cielovy, `${String(i).padStart(2, "0")}.png`));
     process.stdout.write("·");
   }
 
@@ -152,7 +152,44 @@ for (const slidySubor of vsetky) {
   console.log(` ✓  ${path.relative(KOREN, cielovy)}`);
 }
 
+/* ── citátové karty ───────────────────────────────────────────────── */
+/* Jeden obrázok na jeden citát, všetky spolu v ig/out/citaty/, aby sa
+   dali postovať jednotlivo medzi príspevkami o knihách. */
+
+let citatoveSubory = najdiSubory(PUBLIC, "citaty.html");
+if (filtre.length) {
+  citatoveSubory = citatoveSubory.filter((p) => filtre.some((f) => p.includes(f)));
+}
+
+if (citatoveSubory.length) {
+  const citatyDir = path.join(VYSTUP, "citaty");
+  mkdirSync(citatyDir, { recursive: true });
+
+  for (const subor of citatoveSubory) {
+    const priecinok = path.dirname(subor);
+    const slug = path.basename(priecinok);
+    const pocet = pocetSekcii(readFileSync(subor, "utf8"), "q");
+    if (!pocet) continue;
+
+    process.stdout.write(`→ citáty · ${slug} (${pocet}) `);
+
+    const popisy = existsSync(path.join(priecinok, "citaty.txt"))
+      ? readFileSync(path.join(priecinok, "citaty.txt"), "utf8").split(/^▬+ citát \d+ ▬+$/m)
+      : [];
+
+    for (let i = 1; i <= pocet; i++) {
+      const zaklad = path.join(citatyDir, `${slug}-${String(i).padStart(2, "0")}`);
+      odfot(subor, `q${i}`, `${zaklad}.png`);
+      if (popisy[i - 1]) writeFileSync(`${zaklad}.txt`, popisy[i - 1].trim() + "\n");
+      process.stdout.write("·");
+    }
+    console.log(" ✓");
+  }
+}
+
 console.log(
-  `\nHotovo. Obrázky nájdeš v ig/out/ — otvor priečinok, označ všetky PNG a nahraj\n` +
-    `ich do Instagramu v poradí 01, 02, 03… Text popisu je v popis.txt.\n`
+  `\nHotovo.\n` +
+    `  ig/out/<kniha>/   carousel ku knihe — nahraj 01 až 04 v poradí\n` +
+    `  ig/out/citaty/    jednotlivé citáty — každý je samostatný príspevok\n` +
+    `Text popisu je vždy v .txt súbore vedľa obrázka.\n`
 );

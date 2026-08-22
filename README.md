@@ -53,7 +53,7 @@ V `index.md` je hore hlavička medzi `---`. Podstatné je:
 ### 4. Napíš recenziu
 
 Pod hlavičkou. Kostra je predpripravená: **O knihe**, **Hodnotenie**,
-**Komu ju odporúčam**.
+**Kedy by som ju otvorila znova**.
 
 ### 5. Pozri si to
 

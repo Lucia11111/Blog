@@ -45,8 +45,7 @@ V `index.md` je hore hlavička medzi `---`. Podstatné je:
 |---|---|
 | `nazovKnihy`, `autor` | karta knihy a Instagram |
 | `kompas:` | štyri hodnoty 0–10 → graf na webe aj na Instagrame |
-| `hlavnaMyslienka` | veta, ktorá sa ukáže v zozname kníh na domovskej |
-| `podtitul` | veta na druhý obrázok Instagram carouselu |
+| `hlavnaMyslienka` | zhrnutie knihy jednou vetou — dlaždica na domovskej aj 2. obrázok carouselu |
 | `citaty:` | každý citát dostane vlastný obrázok v carouseli |
 | `zaver` | posledný obrázok carouselu |
 | `draft: true` | kniha je rozpísaná a **nezverejní sa** |

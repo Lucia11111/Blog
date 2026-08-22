@@ -20,10 +20,10 @@ kompas:
   echo: 10
   depth: 9
 
-# Veta, ktorá ide na domovskú stránku aj na Instagram
+# Zhrnutie knihy jednou vetou.
+# Ide na dlaždicu na domovskej aj na druhý obrázok Instagram carouselu.
 hlavnaMyslienka: "Naša vlastná vízia môže byť začiatkom spoločnej vízie. A spoločná vízia môže meniť budúcnosť."
 
-podtitul: "Voľné pokračovanie Celestínskeho proroctva, kde príbeh ustupuje myšlienkam o intuícii, vízii a o tom, s čím sme prepojení."
 
 citaty:
   - text: "Chápal jsem jen, že její osobní vize je součástí širší vize, která obsahovala minulost i budoucnost celého lidstva."

@@ -262,7 +262,8 @@
 </section>
 
 {{/* ───────────────────────── 2 · veta ─────────────────────────── */}}
-{{- $veta := $p.podtitul | default $p.description -}}
+{{- /* Druhý obrázok je vždy zhrnutie knihy jednou vetou. */ -}}
+{{- $veta := $p.hlavnaMyslienka | default $p.podtitul | default $p.description -}}
 {{- if $veta }}
 <section class="s" id="s2">
   {{ partial "b612/hviezdy.html" . }}

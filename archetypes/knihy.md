@@ -27,8 +27,9 @@ kompas:
   echo:                 # čo vo mne ostalo
   depth:                # myšlienka pod dejom
 
-# ── Jedna veta, ktorá ide na prvý obrázok carouselu ──────────────
-podtitul: ""
+# ── Zhrnutie knihy jednou vetou ─────────────────────────────────
+# Ide na dlaždicu na domovskej aj na druhý obrázok Instagram carouselu.
+hlavnaMyslienka: ""
 
 # ── Citáty. Každý dostane vlastný obrázok v carouseli. ───────────
 citaty:

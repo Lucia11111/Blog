@@ -19,10 +19,10 @@ kompas:
   echo: 9
   depth: 9
 
-# Veta, ktorá ide na domovskú stránku aj na Instagram
+# Zhrnutie knihy jednou vetou.
+# Ide na dlaždicu na domovskej aj na druhý obrázok Instagram carouselu.
 hlavnaMyslienka: "Oslobodenie neprichádza tým, že sa tieto momenty snažíme udržať, ale tým, že si uvedomíme ich prirodzenosť a necháme ich prísť a odísť bez toho, aby sme sa k nim pripútali."
 
-podtitul: "Oslobodenie neprichádza tým, že sa tieto momenty snažíme udržať, ale tým, že si uvedomíme ich prirodzenosť a necháme ich prísť a odísť bez toho, aby sme sa k nim pripútali."
 
 citaty:
   - text: "Osvobození se nedostavuje tím, že se snažíme tyto momenty udržet, ale tím, že si uvědomíme jejich přirozenost a necháme je přijít a odejít, aniž bychom se k nim připoutali."

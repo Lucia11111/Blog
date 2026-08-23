@@ -21,6 +21,9 @@
 {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- end }}
+{{- /* Poradie na stránke riadi `poradie:` v hlavičke recenzie.
+       Kniha bez neho sa zaradí navrch, ostatné podľa čísla. */ -}}
+{{- $pages = $pages.ByWeight }}
 {{- $paginator := .Paginate $pages }}
 
 <div class="b612-zoznam">
@@ -54,10 +57,9 @@
         {{- else }}{{ with .Params.podtitul }}{{ . }}{{ else }}{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}…{{ end }}{{ end }}{{ end -}}
       </p>
 
-      <div class="b612-polozka__meta">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format (.Site.Params.DateFormat | default "2. 1. 2006") }}</time>
-        {{- with .Params.zanre }} · {{ delimit (first 2 .) " · " }}{{ end }}
-      </div>
+      {{- with .Params.zanre }}
+      <div class="b612-polozka__meta">{{ delimit (first 2 .) " · " }}</div>
+      {{- end }}
     </div>
 
     {{- with $k }}

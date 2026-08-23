@@ -1,6 +1,8 @@
 ---
 title: "Štěstí a bolest"
 date: 2026-08-22
+# poradie na domovskej stránke (menšie číslo = vyššie)
+weight: 1
 draft: false
 
 nazovKnihy: "Štěstí a bolest v současném světě"

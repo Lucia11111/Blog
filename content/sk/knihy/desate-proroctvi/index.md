@@ -1,6 +1,8 @@
 ---
 title: "Desáté proroctví"
 date: 2026-08-15
+# poradie na domovskej stránke (menšie číslo = vyššie)
+weight: 2
 draft: false
 
 nazovKnihy: "Desáté proroctví"

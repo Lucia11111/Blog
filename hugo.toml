@@ -94,7 +94,8 @@ enableInlineShortcodes = true
   disableThemeToggle = true
 
   ShowReadingTime = true
-  ShowShareButtons = true
+  # Rad ikoniek „zdieľať" pod recenziou nechceme.
+  ShowShareButtons = false
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = false

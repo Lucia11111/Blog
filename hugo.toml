@@ -127,12 +127,10 @@ enableInlineShortcodes = true
     favicon32x32 = "img/favicon.png"
     apple_touch_icon = "img/asteroid.png"
 
+  # V pätičke ukazujeme len účty, ktoré naozaj existujú.
   [[params.socialIcons]]
     name = "instagram"
     url = "https://instagram.com/bookspaceb612"
-  [[params.socialIcons]]
-    name = "rss"
-    url = "index.xml"
 
   [params.fuseOpts]
     isCaseSensitive = false

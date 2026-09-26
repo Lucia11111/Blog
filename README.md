@@ -46,7 +46,7 @@ V `index.md` je hore hlavička medzi `---`. Podstatné je:
 | `nazovKnihy`, `autor` | karta knihy a Instagram |
 | `kompas:` | štyri hodnoty 0–10 → graf na webe aj na Instagrame |
 | `hlavnaMyslienka` | zhrnutie knihy jednou vetou — dlaždica na domovskej aj 2. obrázok carouselu |
-| `citaty:` | z každého citátu vznikne samostatný príspevok na Instagram |
+| `citaty:` | motto pod kartou knihy + samostatný príspevok na Instagram |
 | `zaver` | posledný obrázok carouselu |
 | `draft: true` | kniha je rozpísaná a **nezverejní sa** |
 
@@ -54,6 +54,18 @@ V `index.md` je hore hlavička medzi `---`. Podstatné je:
 
 Pod hlavičkou. Kostra je predpripravená: **O knihe**, **Hodnotenie**,
 **Kedy by som ju otvorila znova**.
+
+Citáty píšeš len raz — do `citaty:` v hlavičke. Vykreslí ich `{{< citaty >}}`,
+ktoré je v kostre hneď **pod kartou knihy, ešte pred *O knihe*** — citát tam
+stojí bez nadpisu ako motto a uvedie knihu jej vlastnými slovami. **Keď kniha
+citát nemá, nezobrazí sa nič**, takže shortcode tam pokojne nechaj.
+
+Vetu, ktorú chceš z citátu vytiahnuť, obaľ do `**hviezdičiek**` — citát je
+v kurzíve, takže sa vzpriami a stučnie.
+
+Kúsok rozhovoru z knihy obaľ do `{{< rozhovor >}}` … `{{< /rozhovor >}}`.
+Repliky oddeľuj prázdnym riadkom; vykreslia sa tesne pod sebou, bez zvislej
+čiary — aby sa čítali ako dialóg, nie ako citát.
 
 ### 5. Pozri si to
 

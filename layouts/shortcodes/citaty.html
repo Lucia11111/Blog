@@ -1,8 +1,20 @@
-{{- /* Vypíše všetky citáty zo front matteru pod sebou.  Použitie:  {{< citaty >}} */ -}}
+{{- /* Citáty ku knihe — motto hneď pod kartou knihy.
 
-{{- $cs := .Page.Params.citaty | default slice -}}
+       Stojí bez nadpisu na začiatku recenzie, ešte pred „O knihe",
+       takže knihu uvedie jej vlastnými slovami.
+
+       Keď kniha citát nemá, nevypíše NIČ. Preto shortcode pokojne nechaj
+       v každej recenzii na tom istom mieste, aj keď ešte nevieš, či
+       k nej nejaký citát bude.
+
+       Vetu, ktorú chceš z citátu vytiahnuť, obaľ vo front matteri do
+       **hviezdičiek** — v kurzíve sa vzpriami a stučnie.
+
+       Použitie:  {{< citaty >}} */ -}}
+
+{{- $cs := where (.Page.Params.citaty | default slice) "text" "!=" "" -}}
 {{- if $cs -}}
-<div class="b612-citaty">
+<div class="b612-citaty b612-citaty--motto">
   {{- range $cs }}
   <blockquote class="b612-citat">
     <p>{{ .text | markdownify }}</p>

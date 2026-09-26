@@ -1,0 +1,18 @@
+{{- /* Ukážka rozhovoru z knihy.
+
+       Na rozdiel od citátu nemá zvislú čiaru ani kurzívu — má sa čítať
+       ako dialóg v knihe, preto sú riadky tesne pod sebou.
+
+       Použitie:
+
+         {{< rozhovor >}}
+         „Prvá replika."
+
+         „Druhá replika."
+         {{< /rozhovor >}}
+
+       Repliky oddeľuj prázdnym riadkom ako bežné odseky. */ -}}
+
+<div class="b612-rozhovor">
+{{ .Inner | markdownify }}
+</div>

@@ -2,8 +2,9 @@
 title: "Egypťan Sinuhet"
 date: 2026-09-06
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 4
+weight: 5
 draft: false
+motiv: "obeznica"   # pripnuté — inak by sa zmenilo pri posune weight
 
 nazovKnihy: "Egypťan Sinuhet"
 autor: "Mika Waltari"
@@ -36,6 +37,8 @@ zaver: "Keď si budem chcieť prečítať pekný príbeh, aj keď plný strastí
 ---
 
 {{< kniha >}}
+
+{{< citaty >}}
 
 ## O knihe
 

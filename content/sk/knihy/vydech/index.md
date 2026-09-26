@@ -2,8 +2,9 @@
 title: "Výdech"
 date: 2026-08-23
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 3
+weight: 4
 draft: false
+motiv: "ziara"   # pripnuté — inak by sa zmenilo pri posune weight
 
 nazovKnihy: "Výdech"
 autor: "Ted Chiang"
@@ -32,6 +33,8 @@ zaver: "Keď mám chuť na sci-fi poviedku s myšlienkou, nad ktorou sa dá ešt
 ---
 
 {{< kniha >}}
+
+{{< citaty >}}
 
 ## O knihe
 

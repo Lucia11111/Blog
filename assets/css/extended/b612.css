@@ -584,6 +584,12 @@ h1, h2, h3, h4,
   color: var(--primary);
 }
 
+/* veta, ktorú chceme z citátu vytiahnuť — v kurzíve vystúpi vzpriamením */
+.b612-citat strong {
+  font-style: normal;
+  font-weight: 600;
+}
+
 .b612-citat cite {
   display: block;
   margin-top: 0.65rem;
@@ -603,6 +609,37 @@ h1, h2, h3, h4,
 
 .b612-citaty .b612-citat {
   padding-block: 1rem;
+}
+
+/* ── citát ako motto hneď pod kartou knihy ─────────────────────────
+   Stojí bez nadpisu pred samotnou recenziou, preto potrebuje viac
+   vzduchu okolo seba než citát vnorený do textu. */
+.b612-citaty--motto {
+  margin: 0 0 2.6rem;
+}
+
+.b612-citaty--motto .b612-citat {
+  margin: 0;
+}
+
+/* ── ukážka rozhovoru z knihy ─────────────────────────────────────
+   Bez zvislej čiary a bez kurzívy — má sa čítať ako dialóg v knihe,
+   preto sú repliky tesne pod sebou, nie ako samostatné odseky. */
+.b612-rozhovor {
+  margin: 1.9rem 0;
+  padding-left: 1.7rem;
+}
+
+.b612-rozhovor p {
+  margin: 0 0 0.24rem;
+  font-family: var(--b612-serif);
+  font-size: 1.04rem;
+  line-height: 1.58;
+  color: var(--primary);
+}
+
+.b612-rozhovor p:last-child {
+  margin-bottom: 0;
 }
 
 /* ── karta knihy: obálka, náhľady do knihy a údaje ────────────────── */

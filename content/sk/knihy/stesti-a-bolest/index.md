@@ -2,8 +2,9 @@
 title: "Štěstí a bolest"
 date: 2026-08-22
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 1
+weight: 2
 draft: false
+motiv: "obeznica"   # pripnuté — inak by sa zmenilo pri posune weight
 
 nazovKnihy: "Štěstí a bolest v současném světě"
 autor: "Pavel Špatenka"
@@ -36,6 +37,8 @@ zaver: "Keď by som si chcela rýchlo pripomenúť, ako nám môže budhizmus po
 ---
 
 {{< kniha >}}
+
+{{< citaty >}}
 
 ## O knihe
 

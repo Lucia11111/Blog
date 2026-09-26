@@ -2,8 +2,9 @@
 title: "Desáté proroctví"
 date: 2026-08-15
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 2
+weight: 3
 draft: false
+motiv: "suhvezdie"   # pripnuté — inak by sa zmenilo pri posune weight
 
 nazovKnihy: "Desáté proroctví"
 autor: "James Redfield"
@@ -37,6 +38,8 @@ zaver: "Keď mám chuť na pokojné čítanie a premýšľanie a mám viac času
 ---
 
 {{< kniha >}}
+
+{{< citaty >}}
 
 ## O knihe
 

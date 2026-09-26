@@ -32,6 +32,8 @@ kompas:
 hlavnaMyslienka: ""
 
 # ── Citáty. Každý dostane vlastný obrázok v carouseli. ───────────
+# Vetu, ktorú chceš z citátu vytiahnuť, obaľ do **hviezdičiek**.
+# Keď kniha citát nemá, riadky pokojne zmaž — sekcia sa nezobrazí.
 citaty:
   - text: ""
     strana:
@@ -45,10 +47,15 @@ zaver: ""
 
 {{`{{< kniha >}}`}}
 
+{{`{{< citaty >}}`}}
+
 ## O knihe
 
 Sem príde tvoj text o knihe. Na konci nechaj **tučnú vetu s hlavnou
 myšlienkou** — tú istú, ktorú si napísala hore do `hlavnaMyslienka`.
+
+Ak chceš ukázať kúsok rozhovoru z knihy, obaľ ho do
+{{`{{< rozhovor >}}`}} … {{`{{< /rozhovor >}}`}} — repliky oddeľ prázdnym riadkom.
 
 ## Hodnotenie
 

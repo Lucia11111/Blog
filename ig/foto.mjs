@@ -192,11 +192,14 @@ const rezerva = rotate === 0 ? 0 : Math.ceil(Math.abs(Math.sin((rotate * Math.PI
 const vnutornaW = sirka + 2 * rezerva;
 const vnutornaH = vyskaVysledku + 2 * rezerva;
 
-// obrázok posadíme ako pozadie: zväčšíme ho tak, aby výrez vyplnil rám
-const mierkaW = vnutornaW / (cw / 100);
+// Obrázok posadíme ako pozadie: zväčšíme ho tak, aby výrez vyplnil VÝSLEDNÝ rám.
+// Mierka sa počíta zo `sirka`, nie z `vnutornaW` — rezerva je len pruh navyše okolo
+// rámu, aby sa pri otočení neukázali prázdne rohy, nie súčasť výrezu. Preto sa
+// o rezervu posúva aj pozadie, inak by otočenie výrez zmenšilo a orezalo mu okraje.
+const mierkaW = sirka / (cw / 100);
 const mierkaH = mierkaW * (zdrojH / zdrojW);
-const posunX = -(cx / 100) * mierkaW;
-const posunY = -(cy / 100) * mierkaH;
+const posunX = rezerva - (cx / 100) * mierkaW;
+const posunY = rezerva - (cy / 100) * mierkaH;
 
 odfot(
   `<html><body style="margin:0;overflow:hidden;background:${priehladne ? "transparent" : "#000"};width:${sirka}px;height:${vyskaVysledku}px">

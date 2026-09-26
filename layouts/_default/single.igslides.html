@@ -129,8 +129,16 @@
   /* ── slide 1: obálka ───────────────────────────────────────────── */
   #s1 .obsah { padding: 116px 110px 200px; }
 
-  /* Jemná svetelná žiara za knihou. Tmavé obálky by sa inak na nočnej
-     oblohe strácali — takto vyzerá kniha nasvietená. */
+  /* Za knihou je jeden veľký prvok, ktorý sa medzi knihami strieda —
+     v mriežke profilu tým vzniká rytmus. Malé ozdoby by sa v nej
+     stratili, preto sú všetky tri cez pol obrázka. */
+  #s1 .motiv {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+  }
+
   #s1 .ziara {
     position: absolute;
     left: 50%;
@@ -268,7 +276,30 @@
 {{/* ───────────────────────── 1 · obálka ───────────────────────── */}}
 <section class="s" id="s1">
   {{ partial "b612/hviezdy.html" . }}
-  <div class="ziara"></div>
+  {{- /* Prvok za knihou: `motiv:` v hlavičke, inak sa strieda podľa
+         čísla poradia knihy (weight). */ -}}
+  {{- $motivy := slice "ziara" "obeznica" "suhvezdie" -}}
+  {{- $motiv := $p.motiv | default (index $motivy (mod (int ($p.weight | default 0)) 3)) -}}
+  {{- if eq $motiv "obeznica" }}
+  <svg class="motiv" width="1080" height="1350">
+    <circle cx="540" cy="460" r="420" fill="none" stroke="{{ $pal.gold }}" stroke-width="14" stroke-opacity="0.07"/>
+    <circle cx="540" cy="460" r="420" fill="none" stroke="{{ $pal.gold }}" stroke-width="2.5" stroke-opacity="0.55"/>
+    <circle cx="920" cy="640" r="17" fill="{{ $pal.gold }}" fill-opacity="0.85"/>
+  </svg>
+  {{- else if eq $motiv "suhvezdie" }}
+  <svg class="motiv" width="1080" height="1350">
+    <path d="M130 300 L300 180 L520 250 L760 150 L940 320 L820 560 L560 620 L300 540 Z"
+          fill="none" stroke="{{ $pal.gold }}" stroke-width="1.6" stroke-opacity="0.45"/>
+    <g fill="{{ $pal.cream }}">
+      <circle cx="130" cy="300" r="7" fill-opacity="0.9"/><circle cx="300" cy="180" r="5" fill-opacity="0.8"/>
+      <circle cx="520" cy="250" r="8" fill-opacity="0.95"/><circle cx="760" cy="150" r="5.5" fill-opacity="0.8"/>
+      <circle cx="940" cy="320" r="7" fill-opacity="0.9"/><circle cx="820" cy="560" r="5" fill-opacity="0.75"/>
+      <circle cx="560" cy="620" r="6" fill-opacity="0.8"/><circle cx="300" cy="540" r="6.5" fill-opacity="0.85"/>
+    </g>
+  </svg>
+  {{- else }}
+  <div class="motiv ziara"></div>
+  {{- end }}
   <div class="ramcek"></div>
   <div class="obsah">
     {{- if $cover }}<img class="obalka" src="{{ $cover }}" alt="">{{ end }}

@@ -2,7 +2,7 @@
 title: "Moji priatelia"
 date: 2026-09-26
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 1
+weight: 2
 draft: false
 
 nazovKnihy: "Moji priatelia"

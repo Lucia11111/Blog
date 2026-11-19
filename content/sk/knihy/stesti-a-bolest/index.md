@@ -2,7 +2,7 @@
 title: "Štěstí a bolest"
 date: 2026-08-22
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 2
+weight: 3
 draft: false
 motiv: "obeznica"   # pripnuté — inak by sa zmenilo pri posune weight
 

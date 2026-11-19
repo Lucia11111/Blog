@@ -2,7 +2,7 @@
 title: "Egypťan Sinuhet"
 date: 2026-09-06
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 5
+weight: 6
 draft: false
 motiv: "obeznica"   # pripnuté — inak by sa zmenilo pri posune weight
 

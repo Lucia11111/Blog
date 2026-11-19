@@ -815,3 +815,11 @@ h1, h2, h3, h4,
   background: var(--tertiary);
   color: var(--primary);
 }
+
+/* Oddeľovač medzi citátmi v texte recenzie: · · · */
+.post-content .b612-oddelovac {
+  text-align: center;
+  letter-spacing: 0.4em;
+  color: var(--secondary);
+  margin: 1.2em 0;
+}

@@ -2,7 +2,7 @@
 title: "Výdech"
 date: 2026-08-23
 # poradie na domovskej stránke (menšie číslo = vyššie)
-weight: 4
+weight: 5
 draft: false
 motiv: "ziara"   # pripnuté — inak by sa zmenilo pri posune weight
 

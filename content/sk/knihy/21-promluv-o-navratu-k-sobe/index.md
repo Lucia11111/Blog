@@ -31,6 +31,8 @@ hlavnaMyslienka: "Mysl, která se naučí zůstat, přestane hledat únik."
 # Vetu, ktorú chceme z citátu vytiahnuť, obaľ do **hviezdičiek**.
 citaty:
   - text: "Všímavost je vědomí, které nic nevlastní."
+  - text: "Moudrý je ten, kdo mlčí, když by mohl ublížit pravdou bez lásky."
+    motto: false          # len Instagram, nie pod kartou knihy
 
 # Posledný obrázok carouselu — tá istá veta ako v sekcii
 # „Kedy by som ju otvorila znova" dole v texte.

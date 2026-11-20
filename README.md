@@ -60,6 +60,9 @@ ktoré je v kostre hneď **pod kartou knihy, ešte pred *O knihe*** — citát t
 stojí bez nadpisu ako motto a uvedie knihu jej vlastnými slovami. **Keď kniha
 citát nemá, nezobrazí sa nič**, takže shortcode tam pokojne nechaj.
 
+Citát, ktorý chceš len na Instagram a nie hore pod kartou knihy, označ
+riadkom `motto: false` pod jeho `text:`.
+
 Vetu, ktorú chceš z citátu vytiahnuť, obaľ do `**hviezdičiek**` — citát je
 v kurzíve, takže sa vzpriami a stučnie.
 

@@ -10,9 +10,15 @@
        Vetu, ktorú chceš z citátu vytiahnuť, obaľ vo front matteri do
        **hviezdičiek** — v kurzíve sa vzpriami a stučnie.
 
+       Citát s `motto: false` sa sem nedostane — ide len na Instagram
+       a na stránku /citaty/.
+
        Použitie:  {{< citaty >}} */ -}}
 
-{{- $cs := where (.Page.Params.citaty | default slice) "text" "!=" "" -}}
+{{- $cs := slice -}}
+{{- range where (.Page.Params.citaty | default slice) "text" "!=" "" -}}
+  {{- if ne .motto false }}{{ $cs = $cs | append . }}{{ end -}}
+{{- end -}}
 {{- if $cs -}}
 <div class="b612-citaty b612-citaty--motto">
   {{- range $cs }}
